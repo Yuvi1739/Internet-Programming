@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Login · Campus Library{% endblock %}
+{% block content %}
+<div class="form-layout"><div class="form-aside"><p class="eyebrow">WELCOME BACK</p><h1>Your next chapter starts here.</h1><p>Log in to manage your library activity and find the resources you need.</p></div>
+<form class="panel form-panel" method="post"><p class="eyebrow">ACCOUNT ACCESS</p><h2>Sign in</h2>
+<label>Email address<input type="email" name="email" required autocomplete="username" placeholder="you@college.edu"></label>
+<label>Password<input type="password" name="password" required autocomplete="current-password" placeholder="Enter your password"></label>
+<button class="full" type="submit">Log in</button><p class="form-note">New to the library? <a href="{{ url_for('register') }}">Create a student account</a></p>
+</form></div>
+{% endblock %}

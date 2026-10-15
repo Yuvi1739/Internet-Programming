@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Books · Campus Library{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">YOUR CAMPUS. YOUR KNOWLEDGE.</p>
+    <h1>Find your next<br><span>great read.</span></h1>
+    <p class="hero-text">Search the library catalogue, keep track of borrowed books, and access study materials in one place.</p>
+    <form class="search-form" method="get" action="{{ url_for('index') }}">
+      <input name="q" value="{{ q }}" placeholder="Search title, author, ISBN or category…" aria-label="Search books">
+      <button type="submit">Search books</button>
+    </form>
+  </div>
+  <div class="hero-art"><div class="book-stack"><span></span><span></span><span></span><span></span></div><div class="art-caption">Read. Learn. Grow.</div></div>
+</section>
+<div class="section-heading">
+  <div><p class="eyebrow">LIBRARY CATALOGUE</p><h2>{% if q %}Search results{% else %}Explore books{% endif %}</h2></div>
+  <span class="muted">{{ books|length }} book(s) shown</span>
+</div>
+{% if books %}
+<div class="book-grid">
+  {% for book in books %}
+  <article class="book-card">
+    <div class="book-cover cover-{{ loop.index % 5 }}"><span class="cover-mark">CAMPUS<br>LIBRARY</span><strong>{{ book.title[:1]|upper }}</strong></div>
+    <div class="book-info">
+      <span class="tag">{{ book.category or 'General' }}</span>
+      <h3>{{ book.title }}</h3><p class="muted">by {{ book.author }}</p>
+      <div class="book-card-bottom"><span class="{% if book.available_copies > 0 %}available{% else %}unavailable{% endif %}">{% if book.available_copies > 0 %}{{ book.available_copies }} available{% else %}Currently unavailable{% endif %}</span><a href="{{ url_for('book_detail', book_id=book.id) }}">Details →</a></div>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><h3>No books found</h3><p>Try another title, author, ISBN or category.</p><a class="button secondary" href="{{ url_for('index') }}">Clear search</a></div>
+{% endif %}
+{% endblock %}

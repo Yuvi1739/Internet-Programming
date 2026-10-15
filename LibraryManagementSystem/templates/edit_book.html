@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Edit Book · Campus Library{% endblock %}
+{% block content %}
+<div class="narrow panel form-panel"><a class="back-link" href="{{ url_for('manage_books') }}">← Back to catalogue</a><p class="eyebrow">INVENTORY UPDATE</p><h1>Edit book</h1>
+<form method="post" class="stack-form">
+<label>Book title<input name="title" value="{{ book.title }}" required></label><label>Author<input name="author" value="{{ book.author }}" required></label>
+<label>ISBN<input name="isbn" value="{{ book.isbn or '' }}"></label><label>Category<input name="category" value="{{ book.category or '' }}"></label>
+<div class="form-row"><label>Publication year<input type="number" name="publication_year" value="{{ book.publication_year or '' }}"></label><label>Total copies<input type="number" min="0" name="total_copies" value="{{ book.total_copies }}" required></label></div>
+<p class="muted small-note">Currently issued copies: {{ book.total_copies - book.available_copies }}. Total copies cannot be reduced below this number.</p><button class="full" type="submit">Save changes</button>
+</form></div>
+{% endblock %}

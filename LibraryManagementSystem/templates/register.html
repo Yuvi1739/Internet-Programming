@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Register · Campus Library{% endblock %}
+{% block content %}
+<div class="narrow panel form-panel"><p class="eyebrow">JOIN THE LIBRARY</p><h1>Create student account</h1><p class="muted">Register to view your borrowing history and access study materials.</p>
+<form method="post" class="stack-form">
+<label>Full name<input name="name" required maxlength="100" placeholder="Your full name"></label>
+<label>College email<input type="email" name="email" required maxlength="150" placeholder="you@college.edu"></label>
+<label>Password<input type="password" name="password" required minlength="8" placeholder="At least 8 characters"></label>
+<button class="full" type="submit">Create account</button>
+</form><p class="form-note">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></div>
+{% endblock %}

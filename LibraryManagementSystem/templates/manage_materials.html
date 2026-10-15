@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Manage Materials · Campus Library{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ACADEMIC RESOURCES</p><h1>Manage study materials</h1><p class="muted">Upload PDF or Office documents for students.</p></div></div>
+<div class="two-column">
+<form class="panel form-panel" method="post" enctype="multipart/form-data"><p class="eyebrow">UPLOAD RESOURCE</p><h2>Add study material</h2>
+<label>Material title<input name="title" required maxlength="200" placeholder="e.g. Data Structures Unit 1 Notes"></label>
+<div class="form-row"><label>Academic year<select name="year" required><option value="">Choose year</option>{% for y in ['1','2','3','4'] %}<option value="{{ y }}">Year {{ y }}</option>{% endfor %}</select></label><label>Semester<select name="semester" required><option value="">Choose semester</option>{% for s in ['1','2','3','4','5','6','7','8'] %}<option value="{{ s }}">Semester {{ s }}</option>{% endfor %}</select></label></div>
+<label>File (PDF, DOC, DOCX, PPT, PPTX; max 20 MB)<input type="file" name="file" accept=".pdf,.doc,.docx,.ppt,.pptx" required></label><button class="full" type="submit">Upload material</button></form>
+<div class="panel"><p class="eyebrow">RESOURCE LIBRARY</p><h2>Uploaded materials</h2><div class="inventory-list">{% for m in materials %}<div class="inventory-item"><div class="file-icon small-file">DOC</div><div class="inventory-copy"><strong>{{ m.title }}</strong><small>Year {{ m.year }} · Semester {{ m.semester }}</small></div><a class="small-action" href="{{ url_for('uploaded_file', filename=m.filename) }}" target="_blank" rel="noopener">View</a><form method="post" action="{{ url_for('delete_material', material_id=m.id) }}" data-confirm="Delete this study material?"><button class="text-danger" type="submit">Delete</button></form></div>{% else %}<p class="muted">No materials uploaded yet.</p>{% endfor %}</div></div>
+</div>
+{% endblock %}

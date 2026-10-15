@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Contact · Campus Library{% endblock %}
+{% block content %}
+<div class="form-layout"><div class="form-aside"><p class="eyebrow">WE'RE HERE TO HELP</p><h1>Contact your librarian.</h1><p>Ask about book availability, borrowing rules, fines or study resources.</p><div class="contact-detail"><strong>Library support</strong><span>Messages are saved for the library team to review.</span></div></div>
+<form class="panel form-panel" method="post"><p class="eyebrow">SEND A MESSAGE</p><h2>Contact form</h2>
+<label>Your name<input name="name" value="{{ session.get('name','') }}" required></label><label>Email address<input type="email" name="email" required></label><label>Subject<input name="subject" required></label><label>Message<textarea name="message" rows="5" required></textarea></label><button class="full" type="submit">Send message</button></form></div>
+{% endblock %}
